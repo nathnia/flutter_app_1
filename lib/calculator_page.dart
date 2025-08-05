@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_application_1/widgets/widget_textfield.dart';
 
 class CalculatorPage extends StatefulWidget {
   const CalculatorPage({super.key});
@@ -60,26 +61,17 @@ class _CalculatorPageState extends State<CalculatorPage> {
         margin: EdgeInsets.all(16),
         child: Column(
           children: [
-            TextField(
-              controller: _ctrAngka1,
-              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(
-                labelText: "Angka 1",
-                border: OutlineInputBorder(),
-              ),
+            CustomTextField(
+              labelText: "angka 1",
+              textEditingController: _ctrAngka1,
+              obscureText: false,
             ),
-
             Container(
-              margin: EdgeInsets.fromLTRB(0, 16, 0, 20),
-              child: TextField(
-                controller: _ctrAngka2,
-                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                  labelText: "Angka 2",
-                  border: OutlineInputBorder(),
-                ),
+              margin: EdgeInsets.only(top: 20),
+              child: CustomTextField(
+                labelText: "angka 2",
+                textEditingController: _ctrAngka2,
+                obscureText: false,
               ),
             ),
 

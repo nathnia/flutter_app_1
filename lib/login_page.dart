@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/calculator_page.dart';
 import 'package:flutter_application_1/register_page.dart';
+import 'package:flutter_application_1/widgets/widget_button.dart';
+import 'package:flutter_application_1/widgets/widget_textfield.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -10,8 +12,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   String statusLogin = "";
 
   @override
@@ -34,83 +36,77 @@ class _LoginPageState extends State<LoginPage> {
 
             Container(
               margin: EdgeInsets.only(top: 20),
-              child: TextField(
-                controller: _emailController,
-                decoration: InputDecoration(
-                  labelText: "Email",
-                  border: OutlineInputBorder(),
-                ),
+              child: CustomTextField(
+                labelText: "Email",
+                textEditingController: emailController,
+                obscureText: false,
               ),
             ),
 
             Container(
               margin: EdgeInsets.only(top: 20),
-              child: TextField(
-                controller: _passwordController,
-                decoration: InputDecoration(
-                  labelText: "Password",
-                  border: OutlineInputBorder(),
-                ),
+              child: CustomTextField(
+                labelText: "Password",
+                textEditingController: passwordController,
                 obscureText: true,
               ),
             ),
 
+            Container(margin: EdgeInsets.only(top: 20)),
+
             Container(
               margin: EdgeInsets.only(top: 20),
               child: Center(
-                child: ElevatedButton(
+                child: CustomButton(
+                  text: "Login",
+                  textColor: Colors.deepPurple,
                   onPressed: () {
-                    // if (_emailController.text == 'admin' && _passwordController.text == 'admin') {
-                    //   print("sscss");
-                    // } else {
-                    //   print("sscss");
-                    // }
-
-                    if (_emailController.text == 'admin' &&
-                        _passwordController.text == 'admin') {
+                    if (emailController.text == 'admin' &&
+                        passwordController.text == 'admin') {
                       setState(() {
                         statusLogin = "sukses login";
                         print(statusLogin);
                       });
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const CalculatorPage(),
-                          ),
-                        );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const CalculatorPage(),
+                        ),
+                      );
                     } else {
                       setState(() {
                         statusLogin = "gagal login";
                         print(statusLogin);
                       });
                     }
-
-                    // String email = _emailController.text.trim();
-                    // String password = _passwordController.text.trim();
-
-                    // if (email == 'admin' && password == 'admin') {
-                    //   ScaffoldMessenger.of(context).showSnackBar(
-                    //     SnackBar(content: Text("login sukses"))
-                    //   );
-                    // } else {
-                    //   ScaffoldMessenger.of(context).showSnackBar(
-                    //     SnackBar(content: Text("login gagal"))
-                    //   );
-                    // }
                   },
-                  child: Text("Login"),
+                ),
+              ),
+            ),
+
+            Container(
+              margin: EdgeInsets.only(top: 20),
+              child: Center(
+                child: CustomButton(
+                  text: "Register",
+                  textColor: Colors.deepPurple,
+                  onPressed: () {
+                    print("ini Register");
+                  },
                 ),
               ),
             ),
 
             Text(statusLogin),
-            
+
             Center(
               child: InkWell(
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const RegisterPage()),
+                    MaterialPageRoute(
+                      builder: (context) => const RegisterPage(),
+                    ),
                   );
                 },
                 child: Text(
