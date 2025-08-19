@@ -15,7 +15,7 @@ class CalPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Register Page")),
+      appBar: AppBar(title: Text("Calculator Page")),
       body: Container(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -92,9 +92,9 @@ class CalPage extends StatelessWidget {
               },
             ),
 
-            CustomButton(text: "Move to Football Players", textColor: Colors.deepPurpleAccent, onPressed: () {
-              Get.toNamed(AppRoutes.footballplayers);
-            })
+            // CustomButton(text: "Move to Football Players", textColor: Colors.deepPurpleAccent, onPressed: () {
+            //   Get.toNamed(AppRoutes.footballplayers);
+            // })
           ],
         ),
       ),

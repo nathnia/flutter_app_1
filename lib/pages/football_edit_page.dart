@@ -21,7 +21,8 @@ class FootballEditPage extends StatelessWidget {
 
     footballEditController.nameController.text = player.name;
     footballEditController.positionController.text = player.position;
-    footballEditController.jerseyNumberController.text = player.jerseyNumber.toString();
+    footballEditController.jerseyNumberController.text = player.jerseyNumber
+        .toString();
 
     return Scaffold(
       appBar: AppBar(title: Text("Edit Player")),
@@ -29,28 +30,66 @@ class FootballEditPage extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            CustomTextField(labelText: "Name", textEditingController: footballEditController.nameController, obscureText: false),
+            CustomTextField(
+              labelText: "Name",
+              textEditingController: footballEditController.nameController,
+              obscureText: false,
+            ),
             const SizedBox(height: 20),
-            CustomTextField(labelText: "Position", textEditingController: footballEditController.positionController, obscureText: false),
+            CustomTextField(
+              labelText: "Position",
+              textEditingController: footballEditController.positionController,
+              obscureText: false,
+            ),
             const SizedBox(height: 20),
-            CustomTextField(labelText: "Jersey Number", textEditingController: footballEditController.jerseyNumberController, obscureText: false),
+            CustomTextField(
+              labelText: "Jersey Number",
+              textEditingController:
+                  footballEditController.jerseyNumberController,
+              obscureText: false,
+            ),
             const SizedBox(height: 20),
 
             ElevatedButton(
               onPressed: () {
-                footballController.players[index].name =
-                    footballEditController.nameController.text;
-                footballController.players[index].position =
-                    footballEditController.positionController.text;
-                footballController.players[index].jerseyNumber =
-                    int.tryParse(
-                      footballEditController.jerseyNumberController.text,
-                    ) ??
-                    player.jerseyNumber;
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: Text("Konfirmasi"),
+                    content: Text(
+                      "Apakah kamu yakin ingin menyimpan perubahan?",
+                    ),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop(); 
+                        },
+                        child: Text("No"),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          footballController.players[index].name =
+                              footballEditController.nameController.text;
+                          footballController.players[index].position =
+                              footballEditController.positionController.text;
+                          footballController.players[index].jerseyNumber =
+                              int.tryParse(
+                                footballEditController
+                                    .jerseyNumberController
+                                    .text,
+                              ) ??
+                              player.jerseyNumber;
 
-                footballController.players.refresh();
+                          footballController.players.refresh();
 
-                Get.back();
+                          Navigator.of(context).pop(); 
+                          Get.back(); 
+                        },
+                        child: Text("Yes"),
+                      ),
+                    ],
+                  ),
+                );
               },
               child: Text("Save & Back"),
             ),
